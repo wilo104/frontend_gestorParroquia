@@ -1,0 +1,21 @@
+<!-- Barra superior fija -->
+<header class="navbar">
+  <div class="navbar-left">
+    <img src="assets/logo.png" alt="Logo" class="logo" />
+  
+    <h1>Gestor Parroquial San Juan XXIII</h1>
+  </div>
+  <nav class="navbar-right">
+    <ul>
+      <li><a routerLink="/ingresos" routerLinkActive="active">Ingresos</a></li>
+      <li><a routerLink="/egresos" routerLinkActive="active">Egresos</a></li>
+      <li><a routerLink="/reportes" routerLinkActive="active">Reportes</a></li>
+     <li><a (click)="logout()">Salir</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- Contenedor principal -->
+<main class="contenido">
+  <router-outlet></router-outlet>
+</main>

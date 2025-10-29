@@ -1,0 +1,18 @@
+<div class="login-card">
+  <img src="assets/logo.png" alt="Logo Parroquia" class="logo">
+
+  <h1 class="titulo">
+    Gestor Parroquial
+    <span class="accent">San Juan XXIII</span>
+  </h1>
+
+  <label>Usuario</label>
+  <input type="text" [(ngModel)]="usuario" placeholder="Ingrese su usuario">
+
+  <label>Contraseña</label>
+  <input type="password" [(ngModel)]="contrasena" placeholder="Ingrese su contraseña">
+
+  <button class="boton" (click)="login()">Ingresar</button>
+
+  <!-- <div class="error" *ngIf="errorMsg">{{ errorMsg }}</div> -->
+</div>

@@ -1,0 +1,78 @@
+/* ======= ESTILOS LAYOUT GENERAL ======= */
+
+:host {
+  display: block;
+  height: 100vh;
+  background: #f8f9fa;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ======= NAVBAR ======= */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #004080; /* azul institucional */
+  color: white;
+  padding: 10px 25px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 45px;
+  height: 45px;
+}
+
+.navbar-left h1 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* ======= NAV LINKS ======= */
+.navbar-right ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-right a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.navbar-right a:hover,
+.navbar-right a.active {
+  color: #ffd700; /* dorado al pasar o activo */
+  border-bottom: 2px solid #ffd700;
+}
+
+/* ======= BOTÓN SALIR ======= */
+.logout {
+  background: #d9534f;
+  padding: 6px 14px;
+  border-radius: 5px;
+  transition: 0.2s;
+}
+
+.logout:hover {
+  background: #c9302c;
+}
+
+/* ======= CONTENIDO ======= */
+.contenido {
+  padding: 20px;
+  margin-top: 15px;
+}

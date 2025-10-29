@@ -1,0 +1,56 @@
+<div class="p-6 max-w-5xl mx-auto">
+  <h2 class="text-2xl font-semibold mb-4">Reportes</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-6">
+    <input [(ngModel)]="from" type="date" class="border rounded px-3 py-2" placeholder="Desde" />
+    <input [(ngModel)]="to" type="date" class="border rounded px-3 py-2" placeholder="Hasta" />
+    <button class="bg-black text-white rounded px-4 py-2 md:col-span-2" (click)="cargar()">Generar</button>
+  </div>
+
+  <p *ngIf="errorMsg" class="text-red-600 mb-3">{{ errorMsg }}</p>
+
+  <div *ngIf="resumen" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+    <div class="border rounded p-4">
+      <div class="text-gray-600">Total Ingresos</div>
+      <div class="text-2xl font-bold">S/ {{ resumen.totalIngresos | number:'1.2-2' }}</div>
+    </div>
+    <div class="border rounded p-4">
+      <div class="text-gray-600">Total Egresos</div>
+      <div class="text-2xl font-bold">S/ {{ resumen.totalEgresos | number:'1.2-2' }}</div>
+    </div>
+    <div class="border rounded p-4">
+      <div class="text-gray-600">Balance</div>
+      <div class="text-2xl font-bold" [class.text-green-600]="resumen.balance>=0" [class.text-red-600]="resumen.balance<0">
+        S/ {{ resumen.balance | number:'1.2-2' }}
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="border rounded overflow-hidden">
+      <div class="bg-gray-100 px-4 py-2 font-semibold">Ingresos por categoría</div>
+      <table class="w-full">
+        <thead><tr><th class="p-2 text-left">Categoría</th><th class="p-2 text-right">Total</th></tr></thead>
+        <tbody>
+          <tr *ngFor="let r of ingCat" class="border-t">
+            <td class="p-2">{{ r.categoria }}</td>
+            <td class="p-2 text-right">S/ {{ r.total | number:'1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="border rounded overflow-hidden">
+      <div class="bg-gray-100 px-4 py-2 font-semibold">Egresos por categoría</div>
+      <table class="w-full">
+        <thead><tr><th class="p-2 text-left">Categoría</th><th class="p-2 text-right">Total</th></tr></thead>
+        <tbody>
+          <tr *ngFor="let r of egreCat" class="border-t">
+            <td class="p-2">{{ r.categoria }}</td>
+            <td class="p-2 text-right">S/ {{ r.total | number:'1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
