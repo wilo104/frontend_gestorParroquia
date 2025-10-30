@@ -8,7 +8,7 @@ import { environment } from '../../../src/environments/environment';
 })
 export class EgresosService {
   // private apiUrl = 'http://localhost:4000/api/egresos';
-private apiUrl=(`${environment.apiUrl}/egresos`);
+private apiUrl=(`${environment.apiUrl}/api/egresos`);
 
   constructor(private http: HttpClient) {}
 

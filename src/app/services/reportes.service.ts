@@ -8,7 +8,7 @@ import { environment } from '../../../src/environments/environment';
 })
 export class ReportesService {
   // private base = 'http://localhost:4000/api/reportes';
-   private base=(`${environment.apiUrl}/reportes`);
+   private base=(`${environment.apiUrl}/api/reportes`);
 
 
   constructor(private http: HttpClient) {}
