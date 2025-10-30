@@ -8,7 +8,7 @@ import { environment } from '../../../src/environments/environment';
 })
 export class IngresosService {
   // private apiUrl = 'http://localhost:4000/api/ingresos';
-  private apiUrl=(`${environment.apiUrl}/api/ingresos`);
+ private apiUrl = `${environment.apiUrl}/ingresos`;
 
   constructor(private http: HttpClient) {}
 
