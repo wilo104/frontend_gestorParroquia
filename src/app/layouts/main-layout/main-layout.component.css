@@ -1,78 +1,146 @@
-/* ======= ESTILOS LAYOUT GENERAL ======= */
-
+/* ======= LAYOUT GENERAL ======= */
 :host {
   display: block;
-  height: 100vh;
+  min-height: 100vh;
   background: #f8f9fa;
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Arial, sans-serif;
 }
 
 /* ======= NAVBAR ======= */
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #004080; /* azul institucional */
-  color: white;
-  padding: 10px 25px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  position: sticky; top: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: space-between;
+  background-color: #004080; color: #fff;
+  padding: 10px 16px;
+  box-shadow: 0 2px 5px rgba(0,0,0,.15);
 }
 
-.navbar-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+/* Izquierda: logo + título */
+.navbar-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.logo { width: 40px; height: 40px; flex: 0 0 auto; }
+.title {
+  font-weight: 600; margin: 0;
+  font-size: clamp(14px, 2.8vw, 18px);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
-.logo {
-  width: 45px;
-  height: 45px;
+/* Botón hamburguesa (oculto en desktop) */
+.nav-toggle {
+  display: none;
+  background: transparent; color: #fff; border: 0;
+  font-size: 24px; line-height: 1; padding: 8px 10px; border-radius: 8px;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
 }
+.nav-toggle:active { transform: translateY(1px); }
 
-.navbar-left h1 {
-  font-size: 18px;
-  font-weight: 600;
-}
-
-/* ======= NAV LINKS ======= */
+/* ======= NAV LINKS (desktop) ======= */
 .navbar-right ul {
-  list-style: none;
-  display: flex;
-  gap: 25px;
-  margin: 0;
-  padding: 0;
+  list-style: none; display: flex; gap: 22px; margin: 0; padding: 0;
 }
-
 .navbar-right a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  transition: 0.2s;
+  color: #fff; text-decoration: none; font-weight: 500;
+  padding: 8px 10px; border-radius: 8px; display: inline-block;
+  transition: 0.2s color, 0.2s background, 0.2s border-color;
 }
-
 .navbar-right a:hover,
 .navbar-right a.active {
-  color: #ffd700; /* dorado al pasar o activo */
-  border-bottom: 2px solid #ffd700;
+  color: #ffd700;
+  background: rgba(255,255,255,.08);
+  outline: 0;
 }
-
-/* ======= BOTÓN SALIR ======= */
-.logout {
-  background: #d9534f;
-  padding: 6px 14px;
-  border-radius: 5px;
-  transition: 0.2s;
-}
-
-.logout:hover {
-  background: #c9302c;
-}
+.logout { background: #d9534f; }
+.logout:hover { background: #c9302c; color: #fff; }
 
 /* ======= CONTENIDO ======= */
-.contenido {
-  padding: 20px;
-  margin-top: 15px;
+.contenido { padding: 16px; }
+
+/* ======= RESPONSIVE ======= */
+@media (max-width: 900px) {
+  .navbar { padding: 10px 14px; }
+}
+
+@media (max-width: 768px) {
+  /* Mostrar hamburguesa y transformar menú en drawer */
+  .nav-toggle { display: inline-block; }
+
+  /* Ocultar el menú por defecto en móvil */
+  .navbar-right {
+    position: fixed; inset: 56px 0 auto 0; /* debajo del header */
+    background: #004080; /* mismo color */
+    transform: translateY(-8px); /* fuera de vista (altura 0) */
+    max-height: 0; overflow: hidden;
+    transition: max-height .25s ease, box-shadow .25s ease;
+    box-shadow: 0 0 0 rgba(0,0,0,0);
+  }
+  .navbar-right.open {
+    max-height: 60vh; /* altura visible */
+    box-shadow: 0 6px 16px rgba(0,0,0,.2);
+  }
+
+  .navbar-right ul {
+    flex-direction: column; gap: 6px; padding: 10px 12px;
+  }
+  .navbar-right a {
+    padding: 12px 14px; border-radius: 10px;
+    background: rgba(255,255,255,.06);
+  }
+  .navbar-right a.active {
+    background: rgba(255,215,0,.16); color: #ffd700;
+  }
+
+  /* Título puede ocupar dos líneas si es necesario */
+  .title { white-space: normal; }
+}
+
+/* Accesibilidad foco teclado */
+.navbar-right a:focus-visible,
+.nav-toggle:focus-visible {
+  outline: 3px solid #ffd700; outline-offset: 2px;
+  border-radius: 8px;
+}
+/* Hacemos el layout en columna para el sticky footer */
+:host{
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+}
+
+/* Empuja el footer al fondo cuando hay poco contenido */
+.contenido{
+  flex:1;
+  padding:16px;
+}
+
+/* Footer */
+.site-footer{
+  background:#003366;              /* un tono más oscuro que la navbar */
+  color:#e9eef6;
+  padding:12px 16px;
+  box-shadow:0 -2px 6px rgba(0,0,0,.08);
+}
+.footer-inner{
+  max-width:1100px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  font-size:13.5px;
+}
+.footer-link{
+  color:#ffd700;
+  font-weight:600;
+  text-decoration:none;
+  padding:2px 4px;
+  border-radius:6px;
+  transition:background .2s, color .2s;
+}
+.footer-link:hover{
+  background:rgba(255,215,0,.15);
+  color:#fff;
+}
+
+/* Ajuste en móviles */
+@media (max-width: 480px){
+  .footer-inner{ flex-wrap:wrap; gap:4px 8px; text-align:center; }
 }

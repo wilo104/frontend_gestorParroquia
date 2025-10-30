@@ -1,16 +1,27 @@
 <!-- Barra superior fija -->
-<header class="navbar">
+<header class="navbar" role="banner">
   <div class="navbar-left">
-    <img src="assets/logo.png" alt="Logo" class="logo" />
-  
-    <h1>Gestor Parroquial San Juan XXIII</h1>
+    <img src="assets/logo.png" alt="Logo Parroquia" class="logo" />
+    <h1 class="title">Gestor Parroquial San Juan XXIII</h1>
   </div>
-  <nav class="navbar-right">
-    <ul>
+
+  <!-- Botón hamburguesa (solo móvil) -->
+  <button
+    class="nav-toggle"
+    aria-label="Abrir menú"
+    aria-controls="primary-nav"
+    [attr.aria-expanded]="menuOpen ? 'true' : 'false'"
+    (click)="menuOpen = !menuOpen"
+  >
+    ☰
+  </button>
+
+  <nav class="navbar-right" [class.open]="menuOpen" id="primary-nav" role="navigation">
+    <ul (click)="menuOpen=false">
       <li><a routerLink="/ingresos" routerLinkActive="active">Ingresos</a></li>
       <li><a routerLink="/egresos" routerLinkActive="active">Egresos</a></li>
       <li><a routerLink="/reportes" routerLinkActive="active">Reportes</a></li>
-     <li><a (click)="logout()">Salir</a></li>
+      <li><a (click)="logout()" class="logout">Salir</a></li>
     </ul>
   </nav>
 </header>
@@ -19,3 +30,25 @@
 <main class="contenido">
   <router-outlet></router-outlet>
 </main>
+
+<!-- Contenedor principal -->
+<main class="contenido">
+  <router-outlet></router-outlet>
+</main>
+
+<!-- Footer -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <span>Diseñado por</span>
+    <a
+      href="https://www.linkedin.com/in/wilderlopez/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="footer-link"
+      aria-label="LinkedIn de Wilder López abre en una nueva pestaña"
+    >
+      Wilder López
+    </a>
+    <span>· © {{ year }}</span>
+  </div>
+</footer>

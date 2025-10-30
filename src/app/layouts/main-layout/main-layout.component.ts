@@ -10,6 +10,8 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./main-layout.component.css']
 })
 export class MainLayoutComponent {
+menuOpen = false;
+year = new Date().getFullYear();
 
 logout() {
   localStorage.removeItem('token');

@@ -1,103 +1,179 @@
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #2d4059;
-  font-weight: 600;
+:root{
+  --pad: clamp(10px, 2.4vw, 18px);
+  --gap: clamp(8px, 2vw, 14px);
+  --radius: 12px;
+  --fs-h2: clamp(18px, 4.5vw, 26px);
 }
 
-.formulario {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  margin-bottom: 20px;
+/* Título */
+.titulo{
+  text-align:center;
+  margin: 0 0 16px;
+  color:#2d4059;
+  font-weight:600;
+  font-size: var(--fs-h2);
+}
+
+/* ---------- Formulario ---------- */
+.formulario{
+  display:grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--gap);
+  background:#fff;
+  padding: var(--pad);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+  margin-bottom: 16px;
 }
 
 .formulario select,
-.formulario input {
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-  transition: 0.3s;
+.formulario input{
+  grid-column: span 3;              /* 4 campos por fila en desktop */
+  padding: 10px 12px;
+  border:1px solid #dcdcdc;
+  border-radius:10px;
+  font-size:14px;
+  transition:.2s border, .2s box-shadow;
 }
 
-.formulario input:focus,
-.formulario select:focus {
-  border-color: #1976d2;
-  outline: none;
-  box-shadow: 0 0 5px #90caf9;
+.formulario select:focus,
+.formulario input:focus{
+  border-color:#1976d2;
+  outline:none;
+  box-shadow:0 0 0 3px rgba(25,118,210,.15);
 }
 
-button {
-  padding: 8px 14px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: 0.3s;
+/* Contenedor de botones del formulario */
+.acciones{
+  grid-column: span 3;
+  display:flex;
+  gap: var(--gap);
+  align-items:center;
+  justify-content:flex-start;
 }
 
-.btn-guardar {
-  background-color: #1976d2;
-  color: white;
+.btn{
+  padding: 10px 14px;
+  border:0;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:600;
+  transition: .2s transform, .2s opacity, .2s background;
+  user-select:none;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:active{ transform: translateY(1px); }
+
+.btn-guardar{ background:#1976d2; color:#fff; }
+.btn-guardar:hover{ background:#0d47a1; }
+
+.btn-cancelar{ background:#d32f2f; color:#fff; }
+.btn-cancelar:hover{ background:#9a0007; }
+
+/* ---------- Mensaje de error ---------- */
+.error{
+  text-align:center;
+  color:#c62828;
+  margin: 8px 0 16px;
 }
 
-.btn-guardar:hover {
-  background-color: #0d47a1;
+/* ---------- Tabla / Cards ---------- */
+.table-responsive{ width:100%; overflow:auto; }
+
+.responsive-table{
+  width:100%;
+  border-collapse:collapse;
+  background:#fff;
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
 }
 
-.btn-cancelar {
-  background-color: #d32f2f;
-  color: white;
+.responsive-table th{
+  background:#1976d2;
+  color:#fff;
+  text-align:left;
+  padding:12px;
+  white-space:nowrap;
 }
 
-.btn-cancelar:hover {
-  background-color: #9a0007;
+.responsive-table td{
+  padding:12px;
+  border-bottom:1px solid #eee;
+  vertical-align:top;
 }
 
-.error {
-  text-align: center;
-  color: #c62828;
-  margin-bottom: 10px;
+.responsive-table tr:hover{ background:#f7fbff; }
+
+.celda-acciones{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.btn-editar{ background:#fbc02d; color:#000; }
+.btn-eliminar{ background:#e53935; color:#fff; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px){
+  .formulario select,
+  .formulario input{ grid-column: span 6; } /* 2 por fila */
+  .acciones{ grid-column: span 6; }
 }
 
-th {
-  background: #1976d2;
-  color: white;
-  text-align: left;
-  padding: 10px;
+@media (max-width: 768px){
+  .formulario{
+    grid-template-columns: 1fr;
+  }
+  .formulario select,
+  .formulario input,
+  .acciones{
+    grid-column: 1 / -1;             /* 1 por fila */
+  }
+  .acciones{
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .acciones .btn{ width:100%; }
 }
 
-td {
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-}
+/* Modo “cards” para la tabla en móvil */
+@media (max-width: 640px){
+  .responsive-table thead{ display:none; }
 
-tr:hover {
-  background: #f1f8ff;
-}
+  .responsive-table tr{
+    display:block;
+    background:#fff;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius:10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.06);
+  }
 
-td button {
-  margin-right: 5px;
-  padding: 6px 10px;
-}
+  .responsive-table td{
+    display:flex;
+    justify-content:space-between;
+    gap: 12px;
+    border:0;
+    padding: 8px 6px;
+  }
 
-td button:first-child {
-  background: #fbc02d;
-  color: #000;
-}
+  .responsive-table td::before{
+    content: attr(data-label);
+    font-weight:600;
+    color:#555;
+    margin-right: 12px;
+  }
 
-td button:last-child {
-  background: #e53935;
-  color: #fff;
+  .col-acciones{ display:none; }
+  .celda-acciones{
+    justify-content:flex-end;
+    gap:10px;
+  }
+
+  /* Botones más anchos y táctiles */
+  .btn-editar, .btn-eliminar{
+    padding: 10px 12px;
+    border-radius: 10px;
+  }
 }

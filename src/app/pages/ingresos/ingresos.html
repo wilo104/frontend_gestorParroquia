@@ -1,46 +1,50 @@
-<h2>Gestión de Ingresos</h2>
+<h2 class="titulo">Gestión de Ingresos</h2>
 
 <div class="formulario">
-  <select [(ngModel)]="categoria">
+  <select [(ngModel)]="categoria" aria-label="Categoría">
     <option *ngFor="let c of categorias" [value]="c">{{ c }}</option>
   </select>
 
-  <input type="text" [(ngModel)]="descripcion" placeholder="Descripción" />
-  <input type="number" [(ngModel)]="monto" placeholder="Monto (S/.)" />
-  <input type="date" [(ngModel)]="fecha" />
+  <input type="text" [(ngModel)]="descripcion" placeholder="Descripción" aria-label="Descripción" />
+  <input type="number" [(ngModel)]="monto" placeholder="Monto (S/.)" aria-label="Monto" inputmode="decimal" />
+  <input type="date" [(ngModel)]="fecha" aria-label="Fecha" />
 
-  <button (click)="guardar()" class="btn-guardar">
-    {{ editando ? '💾 Actualizar' : '➕ Agregar' }}
-  </button>
+  <div class="acciones">
+    <button (click)="guardar()" class="btn btn-guardar">
+      {{ editando ? '💾 Actualizar' : '➕ Agregar' }}
+    </button>
 
-  <button *ngIf="editando" (click)="cancelarEdicion()" class="btn-cancelar">
-    ❌ Cancelar
-  </button>
+    <button *ngIf="editando" (click)="cancelarEdicion()" class="btn btn-cancelar">
+      ❌ Cancelar
+    </button>
+  </div>
 </div>
 
 <p *ngIf="errorMsg" class="error">{{ errorMsg }}</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Categoría</th>
-      <th>Descripción</th>
-      <th>Monto</th>
-      <th>Fecha</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
+<div class="table-responsive">
+  <table class="responsive-table">
+    <thead>
+      <tr>
+        <th>Categoría</th>
+        <th>Descripción</th>
+        <th>Monto</th>
+        <th>Fecha</th>
+        <th class="col-acciones">Acciones</th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <tr *ngFor="let item of ingresos">
-      <td>{{ item.categoria }}</td>
-      <td>{{ item.descripcion }}</td>
-      <td>{{ item.monto | currency:'PEN' }}</td>
-      <td>{{ item.fecha | date:'shortDate' }}</td>
-      <td>
-        <button (click)="editar(item)">✏️ Editar</button>
-        <button (click)="eliminar(item.id)">🗑️ Eliminar</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+    <tbody>
+      <tr *ngFor="let item of ingresos">
+        <td data-label="Categoría">{{ item.categoria }}</td>
+        <td data-label="Descripción">{{ item.descripcion }}</td>
+        <td data-label="Monto">{{ item.monto | currency:'PEN' }}</td>
+        <td data-label="Fecha">{{ item.fecha | date:'shortDate' }}</td>
+        <td data-label="Acciones" class="celda-acciones">
+          <button (click)="editar(item)" class="btn btn-editar">✏️ Editar</button>
+          <button (click)="eliminar(item.id)" class="btn btn-eliminar">🗑️ Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
