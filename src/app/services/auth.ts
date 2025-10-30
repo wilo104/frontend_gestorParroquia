@@ -10,7 +10,7 @@ import { environment } from '../../../src/environments/environment';
 export class AuthService {
   // private apiUrl = 'http://localhost:4000';
 
-  private apiUrl=(`${environment.apiUrl}/api`);
+  private apiUrl=(`${environment.apiUrl}`);
 
 
   constructor(private http: HttpClient, private router: Router) {}
